@@ -1,20 +1,9 @@
 
 netconvert --osm-files map.osm -o map.net.xml
-netconvert --osm-files osm.xml -o net.net.xml --osm.stop-output.length 20 --ptstop-output additional.xml --ptline-output ptlines.xml
-
-netconvert --osm-files map.net.xml --osm-files map.osm --type-file typemap.xml -o map.poly.xml
-
-polyconvert net-file map.net.xml --osm-files map.osm --type-file typemap.xml -o map.poly.xml
-
-polyconvert --net-file map.net.xml --osm-files map.osm --type-file typemap.xml -o map.poly.xml
-
-netconvert --osm-files map.osm -o map.net.xml --output.street-names true --output.original-names true
-
 netconvert --osm-files map.osm -o map.net.xml --output.street-names true --output.original-names true
 subl typemap.xml
 polyconvert --net-file map.net.xml --osm-files map.osm --type-file typemap.xml -o map.poly.xml
 python /usr/share/sumo/tools/randomTrips.py -n map.net.xml -e 100 -l
-python /usr/share/sumo/tools/trip/randomTrips.py -n map.net.xml -r map.rou.xml -e 100 -l
 python /usr/share/sumo/tools/randomTrips.py -n map.net.xml -r map.rou.xml -e 100 -l
 subl test.sumo.cfg
 sumo-gui test.sumo.cfg
